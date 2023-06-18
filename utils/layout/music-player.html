@@ -1,26 +1,45 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+<!DOCTYPE html>
+<html lang="en">
 
-function App() {
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player | React App</title>
+    <link rel="stylesheet" href="styles/general.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mpDarkGreen: '#8DB90D',
+                        mpLightGreen: '#B3E817',
+                        mpLightBlack: '#222222',
+                        mpLightGray: '#A8A8A8',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
 
-  return (
-    <>
-      {/* Laptops */}
+<body>
+    <!-- Laptops -->
     <div class="app w-full h-screen hidden md:flex">
         <section class="left w-6/12 h-full bg-mpDarkGreen flex justify-center items-center">
             <div class="player w-[213px] h-96 bg-mpLightBlack rounded-2xl flex flex-col items-center justify-evenly">
 
                 <header class="w-28 h-28 rounded-lg">
                     <img src="/img/music-img.jpg" alt="Simple Illustration for Music Player"
-                        class="w-full h-full rounded-lg"/>
+                        class="w-full h-full rounded-lg">
                 </header>
-                {/* *** Beginning: To Add in Mobile Part *** */}
-                {/* Song Infos */}
+                <!-- *** Beginning: To Add in Mobile Part *** -->
+                <!-- Song Infos -->
                 <div class="text-center flex flex-col items-center justify-center">
-
-                    {/* Toggle the class .messagedefilant
-                    to turn on/off title scrolling */}
+                    <!-- Toggle the class .messagedefilant
+                    to turn on/off title scrolling
+                    -->
                     <div class="messagedefilant">
                         <div class="font-bold text-white text-md"><span>Tambour Voilé</span>
                         </div>
@@ -30,7 +49,7 @@ function App() {
 
                 
 
-                {/* Progress bar */}
+                <!-- Progress bar -->
                 <div class="w-full flex flex-col items-center">
                     <div class="progressbar-container w-48 h-1 bg-white rounded-full cursor-pointer relative">
                     </div>
@@ -40,7 +59,7 @@ function App() {
                     </div>
                 </div>
                 <div class="buttons w-36 flex justify-evenly">
-                    {/* Previous btn */}
+                    <!-- Previous btn -->
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             class="text-mpLightGreen w-6 h-6">
@@ -49,13 +68,13 @@ function App() {
                                 clip-rule="evenodd" />
                         </svg>
                     </button>
-                    {/* Play/Pause btn */}
+                    <!-- Play/Pause btn -->
                     <button class="p-1 rounded-full bg-mpLightGreen">
-                        {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-black w-6 h-6">
+                        <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-black w-6 h-6">
                             <path fill-rule="evenodd"
                                 d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
                                 clip-rule="evenodd" />
-                        </svg> */}
+                        </svg> -->
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             class="text-black w-6 h-6">
                             <path fill-rule="evenodd"
@@ -64,7 +83,7 @@ function App() {
                         </svg>
 
                     </button>
-                    {/* Next btn */}
+                    <!-- Next btn -->
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             class="text-mpLightGreen w-6 h-6">
@@ -74,7 +93,7 @@ function App() {
                         </svg>
                     </button>
                 </div>
-                {/* End : To Add in Mobile Part */}
+                <!-- *** End: To Add in Mobile Part *** -->
             </div>
         </section>
         <section class="right w-6/12 h-full bg-mpLightBlack flex justify-center items-center">
@@ -85,18 +104,19 @@ function App() {
         </section>
     </div>
 
-    {/* Mobile */}
+    <!-- Mobile -->
     <div class="app flex flex-col items-center justify-around w-full h-screen bg-mpLightBlack md:hidden">
-        {/* Logo */}
+        <!-- Logo -->
         <h1
             class="w-40 h-40 text-black bg-mpLightGreen rounded-2xl text-start text-3xl font-semibold flex flex-col justify-center">
             <p class="ms-8">Just</p>
             <p class="ms-8">Music</p>
         </h1>
-        {/* Song Infos */}
+        <!-- Song Infos -->
         <div class="text-center flex flex-col items-center justify-center">
-            {/* Toggle the class .messagedefilant
-                    to turn on/off title scrolling */}
+            <!-- Toggle the class .messagedefilant
+            to turn on/off title scrolling
+            -->
             <div class="messagedefilant">
                 <div class="font-bold text-white text-md"><span>Tambour Voilé</span>
                 </div>
@@ -106,7 +126,7 @@ function App() {
 
         
 
-        {/* Progress bar */}
+        <!-- Progress bar -->
         <div class="w-full flex flex-col items-center">
             <div class="progressbar-container w-48 h-1 bg-white rounded-full cursor-pointer relative">
             </div>
@@ -116,7 +136,7 @@ function App() {
             </div>
         </div>
         <div class="buttons w-36 flex justify-evenly">
-          {/* Previous btn */}
+            <!-- Previous btn -->
             <button>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                     class="text-mpLightGreen w-6 h-6">
@@ -125,13 +145,13 @@ function App() {
                         clip-rule="evenodd" />
                 </svg>
             </button>
-            {/* Play/Pause btn */}
+            <!-- Play/Pause btn -->
             <button class="p-1 rounded-full bg-mpLightGreen">
-                {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-black w-6 h-6">
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="text-black w-6 h-6">
                     <path fill-rule="evenodd"
                         d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
                         clip-rule="evenodd" />
-                </svg> */}
+                </svg> -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                     class="text-black w-6 h-6">
                     <path fill-rule="evenodd"
@@ -140,7 +160,7 @@ function App() {
                 </svg>
 
             </button>
-            {/* Next btn */}
+            <!-- Next btn -->
             <button>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                     class="text-mpLightGreen w-6 h-6">
@@ -151,8 +171,6 @@ function App() {
             </button>
         </div>
     </div>
-    </>
-  )
-}
+</body>
 
-export default App;
+</html>

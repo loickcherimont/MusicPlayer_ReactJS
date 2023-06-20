@@ -76,7 +76,7 @@ function App() {
                         {/* Temporary hidden */}
                         <Mp3
                             title={tracks[trackIndex].title}
-                            author={tracks[0].author}
+                            author={tracks[trackIndex].author}
                         />
 
 

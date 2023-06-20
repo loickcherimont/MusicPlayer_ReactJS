@@ -3,5 +3,16 @@
         "title":"Winning Elevation",
         "author": "Hot Music",
         "src": "data/tracks/winning-elevation-111355.mp3"
+    },
+    {
+        "title":"Summer Walk",
+        "author": "Olexy",
+        "src": "data/tracks/summer-walk-152722.mp3"
+    },
+    {
+        "title":"Trailer Sport Stylish",
+        "author": "Anton_Vlasov",
+        "src": "data/tracks/trailer-sport-stylish-16073.mp3"
     }
+
 ]

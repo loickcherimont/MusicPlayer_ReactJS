@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Mp3 } from "./components/Mp3";
 import { fetchTracks } from "./assets/scripts/main.js";
 import { useRef } from "react";
@@ -7,46 +7,56 @@ import image from "./assets/img/music-img.jpg";
 const tracks = await fetchTracks("./data/tracks.json");
 
 function App() {
+    const LAST_TRACK_INDEX = tracks.length - 1;
     // Reference to audio tag
-    const audio = useRef(null);
+    const audioRef = useRef();
 
     // ** States **
     const [trackIndex, setTrackIndex] = useState(0);
-    // Toggle between pause/play state
-
     const [isPlaying, setIsPlaying] = useState(false);
+    const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);
+
+    // Control play/pause effect of tracks
+    useEffect(() => {
+        if (isPlaying) {
+            audioRef.current.play();
+        } else {
+            audioRef.current.pause();
+        }
+    }, [isPlaying, audioRef]);
+
+    // To keep play/pause mode when user change track
+    useEffect(() => {
+        if(isPlaying) {
+            audioRef.current.play();
+        }
+    }, [currentTrack.src])
 
 
     // ** Handlers **
-    // ****************** TODO ********************************
-    // Fix the Previous/Next buttons
-    // When music is playing
-    // And user select a new one
-    // Keep playing state
-    // And change music (stop previous one, start the new one)
     const handlePrevious = (e) => {
+        e.preventDefault();
         if (trackIndex === 0) {
-            setTrackIndex(tracks.length - 1);
-            return;
+            setTrackIndex(LAST_TRACK_INDEX);
+            setCurrentTrack(tracks[LAST_TRACK_INDEX]);
+        } else {
+            setTrackIndex((trackIndex) => trackIndex - 1);
+            setCurrentTrack(tracks[trackIndex - 1])
         }
-        setTrackIndex((trackIndex) => trackIndex - 1);
-        audio.current.play();
     }
     const handleNext = (e) => {
-        if (trackIndex === tracks.length - 1) {
+        e.preventDefault();
+        if (trackIndex === LAST_TRACK_INDEX) {
             setTrackIndex(0);
-            return;
+            setCurrentTrack(tracks[0])
+        } else {
+            setTrackIndex((trackIndex) => trackIndex + 1);
+            setCurrentTrack(tracks[trackIndex + 1])
         }
-        setTrackIndex((trackIndex) => trackIndex + 1);
-        audio.current.play();
     }
 
     const playingButton = e => {
-        if(isPlaying) {
-            audio.current.pause();
-        } else {
-            audio.current.play();
-        }
+        e.preventDefault();
         setIsPlaying(!isPlaying);
     }
     return (
@@ -73,10 +83,9 @@ function App() {
                     <p className="text-mpLightGray text-xs">Médérice</p>
                 </div> */}
 
-                        {/* Temporary hidden */}
                         <Mp3
-                            title={tracks[trackIndex].title}
-                            author={tracks[trackIndex].author}
+                            title={currentTrack.title}
+                            author={currentTrack.author}
                         />
 
 
@@ -91,42 +100,42 @@ function App() {
                                 <p>59.59</p>
                             </div>
                         </div>
-                        <audio src={tracks[trackIndex].src} ref={audio}/>
-                            <div className="buttons w-36 flex justify-evenly">
-                                {/* Previous btn */}
-                                <button onClick={handlePrevious}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                        className="text-mpLightGreen w-6 h-6">
-                                        <path fillRule="evenodd"
-                                            d="M13.28 3.97a.75.75 0 010 1.06L6.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5a.75.75 0 010-1.06l7.5-7.5a.75.75 0 011.06 0zm6 0a.75.75 0 010 1.06L12.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5a.75.75 0 010-1.06l7.5-7.5a.75.75 0 011.06 0z"
-                                            clipRule="evenodd" />
-                                    </svg>
-                                </button>
-                                {/* Play/Pause btn */}
-                                <button className="p-1 rounded-full bg-mpLightGreen" onClick={playingButton}>
-                                    {isPlaying ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                        className="text-black w-6 h-6">
-                                        <path fillRule="evenodd"
-                                            d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z"
-                                            clip-rule="evenodd" />
-                                    </svg> : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="text-black w-6 h-6">
-                                        <path fillRule="evenodd"
-                                            d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
-                                            clipRule="evenodd" />
-                                    </svg>}
+                        <audio src={currentTrack.src} ref={audioRef} />
+                        <div className="buttons w-36 flex justify-evenly">
+                            {/* Previous btn */}
+                            <button onClick={handlePrevious}>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    className="text-mpLightGreen w-6 h-6">
+                                    <path fillRule="evenodd"
+                                        d="M13.28 3.97a.75.75 0 010 1.06L6.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5a.75.75 0 010-1.06l7.5-7.5a.75.75 0 011.06 0zm6 0a.75.75 0 010 1.06L12.31 12l6.97 6.97a.75.75 0 11-1.06 1.06l-7.5-7.5a.75.75 0 010-1.06l7.5-7.5a.75.75 0 011.06 0z"
+                                        clipRule="evenodd" />
+                                </svg>
+                            </button>
+                            {/* Play/Pause btn */}
+                            <button className="p-1 rounded-full bg-mpLightGreen" onClick={playingButton}>
+                                {isPlaying ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    className="text-black w-6 h-6">
+                                    <path fillRule="evenodd"
+                                        d="M6.75 5.25a.75.75 0 01.75-.75H9a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H7.5a.75.75 0 01-.75-.75V5.25zm7.5 0A.75.75 0 0115 4.5h1.5a.75.75 0 01.75.75v13.5a.75.75 0 01-.75.75H15a.75.75 0 01-.75-.75V5.25z"
+                                        clipRule="evenodd" />
+                                </svg> : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="text-black w-6 h-6">
+                                    <path fillRule="evenodd"
+                                        d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
+                                        clipRule="evenodd" />
+                                </svg>}
 
-                                </button>
-                                {/* Next btn */}
-                                <button onClick={handleNext}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                        className="text-mpLightGreen w-6 h-6">
-                                        <path fillRule="evenodd"
-                                            d="M4.72 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L11.69 12 4.72 5.03a.75.75 0 010-1.06zm6 0a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06L17.69 12l-6.97-6.97a.75.75 0 010-1.06z"
-                                            clipRule="evenodd" />
-                                    </svg>
-                                </button>
-                            </div>
-                            {/* End : To Add in Mobile Part */}
+                            </button>
+                            {/* Next btn */}
+                            <button onClick={handleNext}>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                    className="text-mpLightGreen w-6 h-6">
+                                    <path fillRule="evenodd"
+                                        d="M4.72 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L11.69 12 4.72 5.03a.75.75 0 010-1.06zm6 0a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06L17.69 12l-6.97-6.97a.75.75 0 010-1.06z"
+                                        clipRule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+                        {/* End : To Add in Mobile Part */}
                     </div>
                 </section >
                 <section className="right w-6/12 h-full bg-mpLightBlack flex justify-center items-center">
@@ -137,7 +146,7 @@ function App() {
                 </section>
             </div >
 
-            {/* Mobile */}
+            {/* Mobile -- See later */}
             < div className="app flex flex-col items-center justify-around w-full h-screen bg-mpLightBlack md:hidden" >
                 {/* Logo */}
                 < h1

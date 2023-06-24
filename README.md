@@ -92,10 +92,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris luctus condiment
     - Add animation when music is playing
 -->
 
-## :rocket: Features
-- Lorem ipsum dolor sit amet
-- Lorem ipsum dolor sit amet
-- Lorem ipsum dolor sit amet
+## :rocket: TODO
+- Display current time
 
 <!-- 
     LICENSE

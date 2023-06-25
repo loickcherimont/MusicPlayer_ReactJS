@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Mp3 } from "./components/Mp3";
-import { fetchTracks } from "./assets/scripts/main.js";
+import { fetchTracks, getTrackTime } from "./assets/scripts/main.js";
 import { useRef } from "react";
 import image from "./assets/img/music-img.jpg";
+import { Times } from "./components/Times";
+import "./assets/styles/general.css";
 
 const tracks = await fetchTracks("./data/tracks.json");
 
@@ -15,6 +17,8 @@ function App() {
     const [trackIndex, setTrackIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);
+    const [currentTime, setCurrentTime] = useState("00.00");
+    const [duration, setDuration] = useState(0);
 
     // Control play/pause effect of tracks
     useEffect(() => {
@@ -55,6 +59,20 @@ function App() {
         }
     }
 
+    const handleDuration = (e) => {
+        e.preventDefault();
+
+        const duration = getTrackTime(audioRef.current.duration);
+        setDuration(duration);
+    }
+
+    const handleCurrentTime = (e) => {
+        e.preventDefault();
+
+        const current = getTrackTime(audioRef.current.currentTime);
+        setCurrentTime(current);
+    }
+
     const playingButton = e => {
         e.preventDefault();
         setIsPlaying(!isPlaying);
@@ -70,21 +88,10 @@ function App() {
                             <img src={image} alt="Simple Illustration for Music Player"
                                 className="w-full h-full rounded-lg" />
                         </header>
-                        {/* *** Beginning: To Add in Mobile Part *** */}
-                        {/* Song Infos */}
-                        {/* <div className="text-center flex flex-col items-center justify-center">
-
-                    Toggle the className .messagedefilant
-                    to turn on/off title scrolling
-                    <div className="messagedefilant">
-                        <div className="font-bold text-white text-md"><span>Tambour Voilé</span>
-                        </div>
-                      </div>
-                    <p className="text-mpLightGray text-xs">Médérice</p>
-                </div> */}
 
                         <Mp3
                             title={currentTrack.title}
+                            isPlaying={isPlaying}
                             author={currentTrack.author}
                         />
 
@@ -95,12 +102,14 @@ function App() {
                         <div className="w-full flex flex-col items-center">
                             <div className="progressbar-container w-48 h-1 bg-white rounded-full cursor-pointer relative">
                             </div>
-                            <div className="times text-xs text-mpLightGray flex w-48 justify-between">
-                                <p>00.00</p>
-                                <p>59.59</p>
-                            </div>
+                            <Times current={currentTime} total={duration}/>
                         </div>
-                        <audio src={currentTrack.src} ref={audioRef} />
+                        <audio 
+                            src={currentTrack.src} 
+                            ref={audioRef} 
+                            onLoadedMetadata={handleDuration}
+                            onTimeUpdate={handleCurrentTime}
+                        />
                         <div className="buttons w-36 flex justify-evenly">
                             {/* Previous btn */}
                             <button onClick={handlePrevious}>

@@ -1,0 +1,51 @@
+/* BEGINNING: Translate in Tailwindcss if possible */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Inner progress bar */
+.progressbar-container::before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    border-radius: 9999px;
+    background-color: #B3E817;
+}
+/* END: Translate in Tailwindcss if possible */
+
+/* Texte défilant */
+.messagedefilant {
+    display: block;
+    margin: 1rem auto;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    width: 12rem;
+    min-height: 1.5em;
+  }
+   
+  .messagedefilant div {
+    position: absolute;
+    transform: translateX(100%);
+  }
+   
+  .messagedefilant div span, 
+  .messagedefilant div::after {
+    position: relative;
+    display: inline-flex;
+    white-space: nowrap;
+  }
+   
+  .messagedefilant div span {
+    animation: defilement 8s infinite linear;
+  }
+   
+  @keyframes defilement {
+    0% { transform: translateX(75%); }
+    100% { transform: translateX(-200%); }
+  }

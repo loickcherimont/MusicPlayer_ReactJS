@@ -93,7 +93,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris luctus condiment
 -->
 
 ## :rocket: TODO
-- Display current time
+- ~~Display current time~~
+- Process progress bar / slider
 
 <!-- 
     LICENSE

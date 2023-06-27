@@ -19,6 +19,7 @@ function App() {
     const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);
     const [currentTime, setCurrentTime] = useState("00.00");
     const [duration, setDuration] = useState(0);
+    const [progressValue, setProgressValue] = useState(0);
 
     // Control play/pause effect of tracks
     useEffect(() => {
@@ -71,6 +72,11 @@ function App() {
 
         const current = getTrackTime(audioRef.current.currentTime);
         setCurrentTime(current);
+        setProgressValue(current);
+    }
+
+    const progressUpdate = (e) => {
+        setProgressValue(e.target.value);
     }
 
     const playingButton = e => {
@@ -98,10 +104,11 @@ function App() {
 
 
 
-                        {/* Progress bar */}
                         <div className="w-full flex flex-col items-center">
                             <div className="progressbar-container w-48 h-1 bg-white rounded-full cursor-pointer relative">
                             </div>
+                            {/* Progress Bar */}
+                            <input type="range" value={progressValue} onChange={progressUpdate} max={duration}/>
                             <Times current={currentTime} total={duration}/>
                         </div>
                         <audio 

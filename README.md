@@ -94,7 +94,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris luctus condiment
 
 ## :rocket: TODO
 - ~~Display current time~~
-- Process progress bar / slider
+
+<!-- DON'T MODIFY THIS TODOLIST! -->
+- Fix progress bar / slider : Allow update progress bar value when music is playing
+- Custom progress bar using our styles
+- Pause music when it's finished and return to beginning
+- Responsive
 
 <!-- 
     LICENSE

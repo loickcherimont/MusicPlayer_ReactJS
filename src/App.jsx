@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Mp3 } from "./components/Mp3";
 import { fetchTracks, getTrackTime } from "./assets/scripts/main.js";
 import { useRef } from "react";
@@ -15,23 +15,43 @@ function App() {
     // Reference to audio tag
     const audioRef = useRef();
     const progressBarRef = useRef();
+    const playAnimationRef = useRef();
 
     // ** States **
     const [trackIndex, setTrackIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);
     const [currentTime, setCurrentTime] = useState("00.00");
+
+
     const [duration, setDuration] = useState(0);
-    const [progressBarValue, setProgressBarValue] = useState(0);
+
+    // Update the progress bar value when music is playing
+    // Key functions: requestAnimationFrame
+    const repeat = useCallback(() => {
+        console.log("run");
+
+        const currentTime2 = audioRef.current.currentTime;
+        setCurrentTime(currentTime2);
+        progressBarRef.current.value = currentTime2;
+        progressBarRef.current.style.setProperty('--range-progress', `${(progressBarRef.current.value / duration) * 100}%`);
+
+        playAnimationRef.current = requestAnimationFrame(repeat);
+
+    }, [])
 
     // Control play/pause effect of tracks
     useEffect(() => {
         if (isPlaying) {
             audioRef.current.play();
+            playAnimationRef.current = requestAnimationFrame(repeat);
+            
         } else {
             audioRef.current.pause();
+            cancelAnimationFrame(playAnimationRef.current);
+
         }
-    }, [isPlaying, audioRef]);
+    }, [isPlaying, audioRef, repeat]);
 
     // To keep play/pause mode when user change track
     useEffect(() => {
@@ -68,23 +88,10 @@ function App() {
     }
 
     // Display music duration
-    const handleDuration = (e) => {
-        e.preventDefault();
-
-        const duration = getTrackTime(audioRef.current.duration);
-        setDuration(duration);
-    }
+    const handleDuration = () => setDuration(audioRef.current.duration);
 
     // Update the current time
-    const handleCurrentTime = (e) => {
-        e.preventDefault();
-
-        const current = getTrackTime(audioRef.current.currentTime);
-        progressBarRef.current.value = audioRef.current.currentTime / audioRef.current.duration;
-        setCurrentTime(current);
-        console.log(audioRef.current.duration);
-        
-    }
+    const handleCurrentTime = () => setCurrentTime(audioRef.current.currentTime);
 
     const playingButton = (e) => {
         e.preventDefault();
@@ -93,12 +100,8 @@ function App() {
 
     const handleProgressChange = () => {
         // Update current time
-        const timeSelected = progressBarRef.current.value;
-        audioRef.current.currentTime = timeSelected;
-
-        // Update the current time displaying
-        const current = getTrackTime(timeSelected);
-        setCurrentTime(current);
+        // When progress bar change position
+        audioRef.current.currentTime = progressBarRef.current.value;
     }
     return (
         <>
@@ -127,7 +130,7 @@ function App() {
                             {/* Progress Bar */}
 
                             <input type="range" ref={progressBarRef} defaultValue="0" onChange={handleProgressChange}/>
-                            <Times current={currentTime} total={duration}/>
+                            <Times current={getTrackTime(currentTime)} total={getTrackTime(duration)}/>
                         </div>
                         <audio 
                             src={currentTrack.src} 

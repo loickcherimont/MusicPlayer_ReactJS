@@ -97,7 +97,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris luctus condiment
 
 <!-- DON'T MODIFY THIS TODOLIST! -->
 - Fix progress bar / slider : Allow update progress bar value when music is playing
-- Custom progress bar using our styles
+- ~~Custom progress bar using our styles~~
 - Pause music when it's finished and return to beginning
 - Responsive
 

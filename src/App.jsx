@@ -29,8 +29,6 @@ function App() {
     // Update the progress bar value when music is playing
     // Key functions: requestAnimationFrame
     const repeat = useCallback(() => {
-        console.log("run");
-
         const currentTime2 = audioRef.current.currentTime;
         setCurrentTime(currentTime2);
         progressBarRef.current.value = currentTime2;
@@ -103,6 +101,16 @@ function App() {
         // When progress bar change position
         audioRef.current.currentTime = progressBarRef.current.value;
     }
+
+    // If music is ended
+    // Return to the beginning
+    // And set a pause mode
+    const handleEnded = () => {
+        audioRef.current.currentTime = 0;
+        audioRef.current.pause();
+        setIsPlaying(false);
+        progressBarRef.current.value = 0;
+    }
     return (
         <>
             {/* Laptops */}
@@ -129,7 +137,13 @@ function App() {
                             </div> */}
                             {/* Progress Bar */}
 
-                            <input type="range" ref={progressBarRef} defaultValue="0" onChange={handleProgressChange}/>
+                            <input 
+                                type="range" 
+                                ref={progressBarRef} 
+                                defaultValue="0" 
+                                onChange={handleProgressChange}
+                                max={duration} // Max is equivalent the total duration required to accomplish the reading
+                            />
                             <Times current={getTrackTime(currentTime)} total={getTrackTime(duration)}/>
                         </div>
                         <audio 
@@ -137,6 +151,7 @@ function App() {
                             ref={audioRef} 
                             onLoadedMetadata={handleDuration}
                             onTimeUpdate={handleCurrentTime}
+                            onEnded={handleEnded}
                         />
                         <div className="buttons w-36 flex justify-evenly">
                             {/* Previous btn */}

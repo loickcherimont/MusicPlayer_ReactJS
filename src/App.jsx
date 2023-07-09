@@ -43,7 +43,7 @@ function App() {
         if (isPlaying) {
             audioRef.current.play();
             playAnimationRef.current = requestAnimationFrame(repeat);
-            
+
         } else {
             audioRef.current.pause();
             cancelAnimationFrame(playAnimationRef.current);
@@ -53,7 +53,7 @@ function App() {
 
     // To keep play/pause mode when user change track
     useEffect(() => {
-        if(isPlaying) {
+        if (isPlaying) {
             audioRef.current.play();
         }
     }, [currentTrack.src])
@@ -114,9 +114,9 @@ function App() {
     return (
         <>
             {/* Laptops */}
-            <div className="app w-full h-screen hidden md:flex">
-                <section className="left w-6/12 h-full bg-mpDarkGreen flex justify-center items-center">
-                    <div className="player w-[213px] h-96 bg-mpLightBlack rounded-2xl flex flex-col items-center justify-evenly">
+            <div className="app w-full h-screen md:flex">
+                <section className="left w-full md:w-6/12 h-full bg-mpLightBlack md:bg-mpDarkGreen  flex justify-center items-center">
+                    <div className="player w-full md:w-[213px] h-full md:h-96 bg-mpLightBlack rounded-2xl flex flex-col items-center justify-evenly">
 
                         <header className="w-28 h-28 rounded-lg">
                             <img src={image} alt="Simple Illustration for Music Player"
@@ -133,27 +133,25 @@ function App() {
 
 
                         <div className="w-full flex flex-col items-center">
-                            {/* <div className="progressbar-container w-48 h-1 bg-white rounded-full cursor-pointer relative">
-                            </div> */}
-                            {/* Progress Bar */}
 
-                            <input 
-                                type="range" 
-                                ref={progressBarRef} 
-                                defaultValue="0" 
+                            {/* Seekbar and time */}
+                            <input
+                                type="range"
+                                ref={progressBarRef}
+                                defaultValue="0"
                                 onChange={handleProgressChange}
                                 max={duration} // Max is equivalent the total duration required to accomplish the reading
                             />
-                            <Times current={getTrackTime(currentTime)} total={getTrackTime(duration)}/>
+                            <Times current={getTrackTime(currentTime)} total={getTrackTime(duration)} />
                         </div>
-                        <audio 
-                            src={currentTrack.src} 
-                            ref={audioRef} 
+                        <audio
+                            src={currentTrack.src}
+                            ref={audioRef}
                             onLoadedMetadata={handleDuration}
                             onTimeUpdate={handleCurrentTime}
                             onEnded={handleEnded}
                         />
-                        <div className="buttons w-36 flex justify-evenly">
+                        <div className="buttons w-full md:w-36 flex justify-evenly">
                             {/* Previous btn */}
                             <button onClick={handlePrevious}>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -190,7 +188,7 @@ function App() {
                         {/* End : To Add in Mobile Part */}
                     </div>
                 </section >
-                <section className="right w-6/12 h-full bg-mpLightBlack flex justify-center items-center">
+                <section className="hidden right w-6/12 h-full bg-mpLightBlack md:flex justify-center items-center">
                     <h1 className="logo text-mpLightGreen text-8xl">
                         <p>Just</p>
                         <p className="mt-10">Music</p>
@@ -198,7 +196,7 @@ function App() {
                 </section>
             </div >
 
-{/* 
+            {/* 
 
 MAINTAIN 
 LATER 
@@ -207,18 +205,18 @@ UNDER
 
 PART!
 */}
-            {/* Mobile -- See later */}
+            {/* Mobile -- See later 
             < div className="app flex flex-col items-center justify-around w-full h-screen bg-mpLightBlack md:hidden" >
-                {/* Logo */}
+                {/* Logo *
                 < h1
                     className="w-40 h-40 text-black bg-mpLightGreen rounded-2xl text-start text-3xl font-semibold flex flex-col justify-center" >
                     <p className="ms-8">Just</p>
                     <p className="ms-8">Music</p>
                 </h1 >
-                {/* Song Infos */}
+                {/* Song Infos *
                 < div className="text-center flex flex-col items-center justify-center" >
                     {/* Toggle the className .messagedefilant
-                    to turn on/off title scrolling */}
+                    to turn on/off title scrolling
                     < div className="messagedefilant" >
                         <div className="font-bold text-white text-md"><span>Tambour Voilé</span>
                         </div>
@@ -228,7 +226,7 @@ PART!
 
 
 
-                {/* Progress bar */}
+                {/* Progress bar 
                 < div className="w-full flex flex-col items-center" >
                     <div className="progressbar-container w-48 h-1 bg-white rounded-full cursor-pointer relative">
                     </div>
@@ -238,7 +236,7 @@ PART!
                     </div>
                 </div >
                 <div className="buttons w-36 flex justify-evenly">
-                    {/* Previous btn */}
+                    {/* Previous btn 
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             className="text-mpLightGreen w-6 h-6">
@@ -247,13 +245,13 @@ PART!
                                 clipRule="evenodd" />
                         </svg>
                     </button>
-                    {/* Play/Pause btn */}
+                    {/* Play/Pause btn 
                     <button className="p-1 rounded-full bg-mpLightGreen">
                         {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="text-black w-6 h-6">
                     <path fill-rule="evenodd"
                         d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z"
                         clip-rule="evenodd" />
-                </svg> */}
+                </svg> 
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             className="text-black w-6 h-6">
                             <path fillRule="evenodd"
@@ -262,7 +260,7 @@ PART!
                         </svg>
 
                     </button>
-                    {/* Next btn */}
+                    {/* Next btn 
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             className="text-mpLightGreen w-6 h-6">
@@ -272,7 +270,7 @@ PART!
                         </svg>
                     </button>
                 </div>
-            </div >
+            </div >*/}
         </>
     )
 }

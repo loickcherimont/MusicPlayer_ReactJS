@@ -56,7 +56,7 @@ Click on `Play/Pause` button to play or pause music
 
 ### Change track
 
-Click on `Previous` (:rewind:) or `Next` (:fast_forward:) button to change track
+Click on `Previous` ( :rewind: ) or `Next` ( :fast_forward: ) button to change track
 
 ### Track progression 
 

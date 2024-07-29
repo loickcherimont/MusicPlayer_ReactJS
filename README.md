@@ -62,7 +62,7 @@ Click on `Previous` (:rewind:) or `Next` (:fast_forward:) button to change track
 
 Slide the **red cursor** to move forward/back the track
 
-[Move cursor](/github/movecursor-demo.png)
+![Move cursor](/github/movecursor-demo.png)
 
 
 ## :test_tube: Features

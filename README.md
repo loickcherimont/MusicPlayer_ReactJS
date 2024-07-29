@@ -1,117 +1,81 @@
-<!-- 
-    MAIN TITLE
-    ModelReadme : Replace with project name
-    Language : Replace with main language for the project
+# MusicPlayer_ReactJS
 
-    Ex: Todo_ReactJS 
--->
-# ModelReadme_Language
+![Preview](/github/preview.png)
 
-![MainImageForProject](https://placehold.co/500x300)
 
-<!-- 
-    INTRODUCTION
-    Short summary explaining the reasons of the project and tell about worked concepts
+## :information_source: About  
 
-    Ex: This is a Front-End project made with HTML, CSS for design and JavaScript to work on client-side validation (Constraint API)
--->
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris luctus condimentum tortor a cursus.
+This is a music player made with ReactJS and Tailwindcss to work with tracks,
+audio ressources and re-code an ancient project made using Javascript only.
 
-<!-- 
-    TOOLS
-    Short list of used tools with their versions
 
-    Ex: 
-    - Go 1.18
-    - MySQL 8.0.29
-    - Bootstrap 5.2.0-beta1
--->
 ## :wrench: Tools
-- Lorem X.XX.XXX
-- Lorem X.XX.XXX
-- Lorem X.XX.XXX
+- ReactJS 18.2.0
+- Tailwindcss 3.3.2
+- Musics from [Pixabay](https://www.pixabay.com)
 
-<!-- 
-    PREREQUISITES
-    Tell about the required options, softwares, knowledges to possess 
-    to run correctly the project 
 
-    Ex: Setup username and password for database in database.go
--->
+## :inbox_tray: Setup for contributions
+
+1. Open a terminal and run these commands :
+
+```bash
+git clone git@github:loickcherimont/MusicPlayer_ReactJS.git
+cd MusicPlayer_ReactJS
+```
+
+2. Retrieve all dependencies and fix possible bugs :
+
+```bash
+npm i
+npm audit fix
+```
+
+3. Launch the project
+
+```bash
+npm run dev
+```
+
+4. The project is ready!
+
+![Preview](/github/preview.png)
+
+
 ## :warning: Prerequisites
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris luctus condimentum tortor a cursus.
 
-```bash
-# Lorem ipsum dolor sit amet
-# Lorem ipsum dolor sit amet
-# Lorem ipsum dolor sit amet
-```
+*For this app, no required prerequisites*
 
-<!-- 
-    SETUP
-    Explain using command lines, the steps to follow to setup the project
-    At the end show, the expected result with a image   
+## :thinking: How does it run ?
 
-    Ex: 
-    1. Download the whole project `Travel` on your system
-    2. Open your terminal in `Travel`
-    ```
-    cd Travel
-    ```
-    3. In `Travel` directory, run:
-    ```
-    go run github.com/loickcherimont/Travel/main
-    ```
-    4. If there is no error. Go on your favorite browser and use this line in your URL address bar
-    ```
-    http://localhost:8080/travel
-    ```
-    5. Here you are! Welcome in the main page of the Web application
+Music Player has been built to be the more intuitive possible
 
-    ![Main page of the application](assets/images/readme_images/mainpage.png)
--->
+### Play/Pause a track
 
-## :inbox_tray: Setup
-1. Lorem ipsum dolor sit amet, `consectetur` adipiscing elit
-2. Lorem **ipsum dolor sit** amet, consectetur adipiscing elit
-```bash
-# Lorem ipsum dolor sit amet
-# Lorem ipsum dolor sit amet
-# Lorem ipsum dolor sit amet
-```
-3. Lorem ipsum dolor sit amet, *consectetur adipiscing elit*
+Click on `Play/Pause` button to play or pause music
 
-![ExpectResultsAfterSetup](https://placehold.co/300x200)
+### Change track
 
-<!-- 
-    FEATURES
-    List of the main new features, fixes to bring on the project
+Click on `Previous` (:rewind:) or `Next` (:fast_forward:) button to change track
 
-    Ex:
-    - Setup Night/Day mode
-    - Add animation when music is playing
--->
+### Track progression 
 
-## :rocket: TODO
-- ~~Display current time~~
+Slide the **red cursor** to move forward/back the track
 
-<!-- DON'T MODIFY THIS TODOLIST! -->
-- Fix progress bar / slider : Allow update progress bar value when music is playing
-- ~~Custom progress bar using our styles~~
-- ~~Pause music when it's finished and return to beginning~~
-- Adapt the player to all screens
-- Accomplish last todos in each files
-- Write the **README.md**
+[Move cursor](/github/movecursor-demo.png)
 
-<!-- 
-    LICENSE
-    Write Developer name with used license
 
-    Ex: Made by Loïck Chérimont
-        Under MIT License 
- -->
+## :test_tube: Features
+
+- Turn up/down volume using UI
+- Move forward/back track progression using buttons
+
 
 ## :key: License
-Lorem ipsum dolor sit amet  
-Lorem ipsum dolor sit amet
+
+Developed by Loick Cherimont  
+
+Under MIT License  
+
+Last edition on: 2024-07-29
 
